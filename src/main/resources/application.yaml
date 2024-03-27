@@ -1,0 +1,38 @@
+server:
+  port: 8080
+  error:
+    whitelabel:
+      enabled: false
+  shutdown: graceful
+  compression:
+    enabled: true
+    mime-types: text/html,text/xml,text/plain,text/css,application/javascript,application/json,image/svg+xml
+    min-response-size: 1024
+  forward-headers-strategy: framework
+spring:
+  servlet:
+    multipart:
+      enabled: false
+  web:
+    resources:
+      static-locations: classpath:/resources/,classpath:/static/
+
+
+springdoc:
+  show-actuator: true
+  swagger-ui:
+    path: /api/swagger
+    enabled: true
+  api-docs:
+    path: /api/openapi
+    enabled: true
+
+management:
+  endpoint:
+    env:
+      show-values: ALWAYS
+  endpoints:
+    web:
+      exposure:
+        include:
+          - '*'
