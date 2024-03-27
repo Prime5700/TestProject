@@ -2,7 +2,9 @@ package com.test.controller;
 
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
+import org.springframework.core.env.Environment;
 import org.springframework.http.HttpRequest;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -11,6 +13,15 @@ import java.util.List;
 @RequestMapping("api/test")
 @RequiredArgsConstructor
 public class TestController {
+
+    private final Environment env;
+
+    @GetMapping("health")
+    public ResponseEntity<?> healthTest() {
+        String profile=env.getActiveProfiles()[0];
+        boolean bool=profile.equalsIgnoreCase("test");
+        return bool ? ResponseEntity.badRequest().build() : ResponseEntity.ok("healh test");
+    }
 
     @GetMapping("1")
     public String test1() {
