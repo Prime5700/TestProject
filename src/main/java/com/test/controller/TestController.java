@@ -22,7 +22,7 @@ public class TestController {
 
     @GetMapping("health")
     public ResponseEntity<?> healthTest() {
-        if (count >= 20) return ResponseEntity.badRequest().body("Count increased to " + getCount());
+        if (count >= 2000) return ResponseEntity.badRequest().body("Count increased to " + getCount());
         return ResponseEntity.ok(getCount());
     }
     @GetMapping("1")
