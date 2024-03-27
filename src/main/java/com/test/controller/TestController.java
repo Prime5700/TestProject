@@ -14,15 +14,17 @@ import java.util.List;
 @RequiredArgsConstructor
 public class TestController {
 
-    private final Environment env;
+    private Integer count = 0;
+
+    public Integer getCount() {
+        return count++;
+    }
 
     @GetMapping("health")
     public ResponseEntity<?> healthTest() {
-        String profile=env.getActiveProfiles()[0];
-        boolean bool=profile.equalsIgnoreCase("test");
-        return bool ? ResponseEntity.badRequest().build() : ResponseEntity.ok("healh test");
+        if (count >= 20) return ResponseEntity.badRequest().body("Count increased to " + getCount());
+        return ResponseEntity.ok(getCount());
     }
-
     @GetMapping("1")
     public String test1() {
         return "1";
