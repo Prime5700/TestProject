@@ -21,18 +21,22 @@ public class TestController {
     }
 
     @GetMapping("health")
-    public ResponseEntity<?> healthTest() {
+    public ResponseEntity<?> healthTest(HttpServletRequest request) {
+        request.getHeaderNames().asIterator().forEachRemaining(t -> System.out.println(t + "===" + request.getHeader(t)));
         if (count >= 2000) return ResponseEntity.badRequest().body("Count increased to " + getCount());
         return ResponseEntity.ok(getCount());
     }
+
     @GetMapping("1")
     public String test1() {
         return "1";
     }
+
     @GetMapping("ip")
-    public String ip(HttpServletRequest request){
+    public String ip(HttpServletRequest request) {
         return getClientIpAddress(request);
     }
+
     public String getClientIpAddress(HttpServletRequest request) {
         String ip = request.getHeader("X-Forwarded-For");
         if (ip == null || ip.isEmpty() || ip.equalsIgnoreCase("unknown")) {
