@@ -24,6 +24,11 @@ public class HTMLController {
     @PostMapping("pdf")
     public ResponseEntity<String> convert(@RequestBody HTMLPayload payload) throws IOException, ConnectionException {
         log.info(payload);
+        if(payload==null) return ResponseEntity.badRequest().body("No payload received");
+        if(payload.html()==null|| payload.html().isBlank()) return ResponseEntity.badRequest().body("HTML is null or empty");
+        if(payload.accessToken()==null|| payload.accessToken().isBlank()) return ResponseEntity.badRequest().body("AccessToken is null or empty");
+        if(payload.parentId()==null|| payload.parentId().isBlank()) return ResponseEntity.badRequest().body("ParentId is null or empty");
+        if(payload.instanceUrl()==null|| payload.instanceUrl().isBlank()) return ResponseEntity.badRequest().body("Instance url is null or empty");
         String output = service.convert(payload.html());
         var pc = SalesForceConfig.buildSalesforcePartnerConnection(payload.accessToken(), payload.instanceUrl() + "/services/Soap/u/59.0");
         return ResponseEntity.ok().body(service.upload(pc, payload.parentId(), output));
