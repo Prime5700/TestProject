@@ -2,31 +2,14 @@ package com.test.controller;
 
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
-import org.springframework.core.env.Environment;
-import org.springframework.http.HttpRequest;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("api/test")
 @RequiredArgsConstructor
 public class TestController {
-
-    private Integer count = 0;
-
-    public Integer getCount() {
-        return count++;
-    }
-
-    @GetMapping("health")
-    public ResponseEntity<?> healthTest(HttpServletRequest request) {
-        request.getHeaderNames().asIterator().forEachRemaining(t -> System.out.println(t + "===" + request.getHeader(t)));
-        if (count >= 2000) return ResponseEntity.badRequest().body("Count increased to " + getCount());
-        return ResponseEntity.ok(getCount());
-    }
-
     @GetMapping("1")
     public String test1() {
         return "1";
