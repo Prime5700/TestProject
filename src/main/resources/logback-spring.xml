@@ -4,8 +4,7 @@
     <property name="REQUEST_LOG_FILE" value="request.log"/>
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
-            <pattern>%d{yyyy-MM-dd'T'HH:mm:ss.SSSXXX} [%magenta(%thread)] %highlight(%-5level) [%yellow(%logger{36})] - %msg%n
-            </pattern>
+            <pattern>%d{yyyy-MM-dd'T'HH:mm:ss.SSSXXX} [%magenta(%thread)] %highlight(%-5level) [%yellow(%logger{36})] - %msg%n</pattern>
         </encoder>
     </appender>
     <appender name="FILE"
